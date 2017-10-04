@@ -9,6 +9,8 @@
 
 
 // #define ACCESSCOUNT_DEBUG // Prints the hit counts of the words. The more hits a word has, the earlier it will be checked.
+#define PRINT_DICTIONARY
+
 // How much to expand the arraylist when the allocated size becomes full
 #define SIZE_MULTIPLIER 2
 // Average length of the words. Will be used to determine initial buffer size.
@@ -70,19 +72,27 @@ int main(int argc, char** argv) {
 
     fillDictionary(&dictionary, fpDictionary);
 
+    #if defined PRINT_DICTIONARY
     printf("\nDICTIONARY BEFORE SORTING:\n");
     printDictionary(dictionary);
+    #endif
 
     quickSortDictionary(dictionary);
 
+    #if defined PRINT_DICTIONARY
     printf("\nDICTIONARY AFTER SORTING: \n");
     printDictionary(dictionary);
+    #endif
+
 
     printf("\nTEST RESULTS: \n");
     checkTextFile(fpText, dictionary);
 
+    #if defined PRINT_DICTIONARY
     printf("\nUPDATED VERSION OF DICTIONARY (Words are sorted realtime according to their hit counts):\n");
     printDictionary(dictionary);
+    #endif
+
 
     return 0;
 }
